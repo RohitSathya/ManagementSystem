@@ -19,12 +19,12 @@ function Dashboard() {
           return;
         }
 
-        const { data: userData } = await axios.get('http://localhost:5000/api/auth/me', {
+        const { data: userData } = await axios.get('https://management-system-ochre.vercel.app/api/auth/me', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUsername(userData.name);
 
-        const { data: projectsData } = await axios.get('http://localhost:5000/api/projects', {
+        const { data: projectsData } = await axios.get('https://management-system-ochre.vercel.app/api/projects', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProjects(projectsData);
@@ -44,14 +44,14 @@ function Dashboard() {
       const token = localStorage.getItem('token');
       if (editingProject) {
         // Update project
-        const { data } = await axios.put(`http://localhost:5000/api/projects/${editingProject._id}`, newProject, {
+        const { data } = await axios.put(`https://management-system-ochre.vercel.app/api/projects/${editingProject._id}`, newProject, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProjects(projects.map(p => p._id === editingProject._id ? data : p));
         setEditingProject(null);
       } else {
         // Create new project
-        const { data } = await axios.post('http://localhost:5000/api/projects', newProject, {
+        const { data } = await axios.post('https://management-system-ochre.vercel.app/api/projects', newProject, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProjects([...projects, data]);
@@ -70,7 +70,7 @@ function Dashboard() {
   const handleDelete = async (projectId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/projects/${projectId}`, {
+      await axios.delete(`https://management-system-ochre.vercel.app/api/projects/${projectId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setProjects(projects.filter(p => p._id !== projectId));
