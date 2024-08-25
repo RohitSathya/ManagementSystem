@@ -12,8 +12,8 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/register', { name, email, password });
-      await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      await axios.post('https://management-system-ochre.vercel.app/api/auth/register', { name, email, password });
+      await axios.post('https://management-system-ochre.vercel.app/api/auth/login', { email, password });
       navigate('/login');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
